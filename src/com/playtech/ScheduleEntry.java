@@ -15,16 +15,8 @@ public class ScheduleEntry {
         return station;
     }
 
-    public void setStation(String station) {
-        this.station = station;
-    }
-
     public LocalTime getTime() {
         return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
     }
 
     @Override

@@ -1,12 +1,13 @@
 package com.playtech;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 
@@ -18,16 +19,28 @@ public class Main {
         lines = Files.lines(Paths.get("schedule.txt"))
                 .collect(Collectors.toList());
 
-        for (String str: lines) {
+        for (String str : lines) {
             String[] chunks = str.split(" ");
-            List<ScheduleEntry> schedule = new ArrayList<>();
+            Map<String, LocalTime> schedule = new TreeMap<>();
             for (int i = 1; i < chunks.length; i++) {
                 String[] entry = chunks[i].split("=");
-                schedule.add(new ScheduleEntry(entry[0], LocalTime.parse(entry[1])));
+                schedule.put(entry[0], LocalTime.parse(entry[1]));
             }
             trains.add(new Train(chunks[0], schedule));
         }
         trains.forEach(System.out::println);
+        isDirectConnection(trains, "CLU", "ADC");
+        isShortTrip(trains, "CLU", "ADC");
+    }
+
+    public static void isDirectConnection(List<Train> trains, String station1, String station2) {
+        trains
+                .stream()
+                .filter(s -> s.getSchedule().containsKey(station1)&&s.getSchedule().containsKey(station2))
+                .filter(s-> s.getSchedule().get(station1).isBefore(s.getSchedule().get(station2)))
+                .forEach(s->System.out.println(s.getId()));
+    }
+    public static void isShortTrip(List<Train> trains, String station1, String station2) {
 
     }
 }
