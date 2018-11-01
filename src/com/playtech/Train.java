@@ -9,10 +9,17 @@ public class Train {
     private String id;
     //private List<ScheduleEntry> schedule;
     private Map<String, LocalTime> schedule;
+    private Map<String, Integer> stopNrs;
 
-    public Train(String id, Map<String, LocalTime> schedule) {
+    public Train(String id, Map<String, LocalTime> schedule, Map<String, Integer> stopNrs) {
         this.id = id;
         this.schedule = schedule;
+        this.stopNrs = stopNrs;
+
+    }
+
+    public Map<String, Integer> getStopNrs() {
+        return stopNrs;
     }
 
     public String getId() {
