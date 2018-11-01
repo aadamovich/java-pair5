@@ -13,12 +13,6 @@ import static java.util.stream.Collectors.toList;
 
 public class Main {
 
-  public static class TrainManager {
-
-    List<Train> trains = new ArrayList<>();
-
-  }
-
   public static void main(String[] args) throws IOException {
 
     List<Train> trains = lines(get("schedule.txt"))
