@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static java.util.stream.Collectors.joining;
-
 public class Train {
 
     private String id;
@@ -42,6 +40,6 @@ public class Train {
     public String toString() {
         return "Train{" +
                 "id='" + id + '\'' +
-                ", schedule=" + schedule+'}';
+                ", schedule=" + schedule + '}';
     }
 }
