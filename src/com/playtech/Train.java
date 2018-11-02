@@ -42,10 +42,6 @@ public class Train {
     public String toString() {
         return "Train{" +
                 "id='" + id + '\'' +
-                ", schedule=" + schedule
-                .entrySet()
-                .stream()
-                .map(entry -> entry.getKey() + "=" + entry.getValue()).collect(joining()) +
-                '}';
+                ", schedule=" + schedule+'}';
     }
 }

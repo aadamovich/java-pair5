@@ -22,7 +22,7 @@ public class Main {
         trains.forEach(System.out::println);
 
         isDirectConnection(trains, "CLU", "ADC");
-        isShortTrip(trains, "CLU", "DED");
+        isShortTrip(trains, "IAS", "DED");
 
     }
 
