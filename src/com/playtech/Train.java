@@ -42,4 +42,10 @@ public class Train {
                 "id='" + id + '\'' +
                 ", schedule=" + schedule + '}';
     }
+
+    public boolean hasNextStations(String station1) {
+        return StreamEx.of(schedule.keySet())
+                .dropWhile(station -> !station.equals(station1))
+                .count() >= 1;
+    }
 }

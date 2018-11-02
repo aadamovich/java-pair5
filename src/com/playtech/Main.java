@@ -21,8 +21,9 @@ public class Main {
 
         trains.forEach(System.out::println);
 
-        isDirectConnection(trains, "CLU", "ADC");
+        System.out.println(isDirectConnection(trains, "CLU", "ADC"));
         isShortTrip(trains, "IAS", "DED");
+        //System.out.println(areConnected(trains, "FRA", "BUC"));
 
     }
 
@@ -36,12 +37,12 @@ public class Main {
         return newTrain;
     }
 
-    public static void isDirectConnection(List<Train> trains, String station1, String station2) {
-        trains
+    public static List<Train>  isDirectConnection(List<Train> trains, String station1, String station2) {
+        return trains
                 .stream()
                 .filter(s -> s.getSchedule().containsKey(station1) && s.getSchedule().containsKey(station2))
                 .filter(s -> s.getSchedule().get(station1).isBefore(s.getSchedule().get(station2)))
-                .forEach(s -> System.out.println(s.getId()));
+                .collect(toList());
     }
 
     public static void isShortTrip(List<Train> trains, String station1, String station2) {
@@ -51,5 +52,22 @@ public class Main {
                 .forEach(System.out::println);
 
     }
+    public static List<Train> areConnected(List<Train> trains, String station1, String station2){
+        List<Train> trains2 = isDirectConnection(trains, station1,station2);
+        if (trains2.size() > 0)  return trains2;
+        trains2 = trains
+                .stream()
+                .filter(train -> train.hasNextStations(station1))
+                .collect(toList());
+        if (trains2.size() < 1) return null;
+        for (Train train: trains2) {
+            for (String station: train.getSchedule().keySet()) {
+                return areConnected(trains, station, station2);
+            }
+
+        }
+        return null;
+    }
+
 
 }
